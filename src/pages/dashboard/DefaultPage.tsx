@@ -1,8 +1,6 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { addItens } from '../../redux/modules/itens/action'
-import Cards from '../../components/common/Cards/Cards'
+import { useEffect, useState } from 'react'
 import api from '../../services/api'
+import CardStyle from '../../styles/card'
 
 type Props = {}
 
@@ -19,23 +17,37 @@ export interface iItens {
 }
 
 const DefaultPage = (props: Props) => {
-  const dispatch = useDispatch();
+  const [itens, setItens] = useState<iItens[] | []>([])
 
   useEffect(() => {
     async function getItens() {
       try {
         const response = await api.get<iItens[]>('posts') 
-        dispatch(addItens(response.data))
+        setItens(response.data)
       } catch (error) {
         console.error(error)
       }
     }
     
     getItens()
-  }, [dispatch])
+  }, [])
 
   return (
-    <Cards/>
+    <CardStyle>
+      {
+        itens.map((item, index) => {
+            return (
+              <li key={ index }>
+                <img src={ item.picture } alt={ item.book }/>
+                <h2>{ item.book }</h2>
+                <p>{ item.description }</p>
+                <p>{ item.location }</p>
+                <p>{ item.subway }</p>
+              </li>
+            )
+        })
+      }
+    </CardStyle>
   )
 }
 
