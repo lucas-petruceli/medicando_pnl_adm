@@ -6,16 +6,14 @@ const ChangelogPage = (props: Props) => {
   const [itens, setItens] = useState([])
 
   let count = 0
-  console.log(`ChangeLogPage ${count++}`)
-
   useEffect(() => {
-    console.log(`useEffect ${count++}`)
-    fetch("https://jsonplaceholder.typicode.com/todos/")
-    .then((response) => response.json())
-    .then((data) => setItens(data))
-    .catch((error) => console.log(error))
-
-
+    if (count === 0) {
+      fetch("https://jsonplaceholder.typicode.com/todos/")
+      .then((response) => response.json())
+      .then((data) => setItens(data))
+      .catch((error) => console.log(error))
+    }
+    count++
   }, [])
 
   return (

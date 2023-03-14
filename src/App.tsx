@@ -5,14 +5,12 @@ import { routes } from "./routes"
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Mainlayout/>}>
-          {/* <Route index element={<HomePage/>}/> */}
-          {routes}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Mainlayout/>}>
+        {/* <Route index element={<HomePage/>}/> */}
+        {routes}
+      </Route>
+    </Routes>
   );
 }
 
